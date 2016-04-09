@@ -1,6 +1,8 @@
+Thomas Luong
+Kim McLeod
 
 
-Entities in my databases are:
+Entities in the databases are:
 
 Champions:  They will have names, origin, damage-types, 
 
