@@ -71,7 +71,6 @@ CREATE TABLE Lane (
 CREATE TABLE Lanes (
   lane_id TINYINT UNSIGNED NOT NULL,
   champion_id INT(11) UNSIGNED NOT NULL,
-  lane_name VARCHAR(20) NOT NULL,
   PRIMARY KEY  (lane_id, champion_id),
 
 CONSTRAINT FK_Lanes_champion_id FOREIGN KEY (champion_id)   
