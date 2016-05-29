@@ -1,0 +1,25 @@
+Thomas Luong
+Kim McLeod
+
+
+Entities in the databases are:
+
+Champions:  They will have names, origin, damage-types, 
+
+Items:  The purchase-able items available ingame
+
+Lanes: The five Lane available to be taken up in dynamic queue.
+
+Gameplay:  The type of roles that are available
+
+
+
+Relationships between my entities are:
+
+Champions synergize with what item - many-to-many relationships, as champions can use many items.
+
+Champions do better in specific lanes - many-to-many relationship as champions can belong to multiple lanes
+
+Champions and their type of gameplay/role - many-to-many relationship as champions can belong to a combination of roles.  
+
+Champions and their matchups with other champions - many-to many relationship,  as each champion wins a matchup against multiple other champions.  
