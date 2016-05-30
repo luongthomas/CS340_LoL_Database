@@ -1,3 +1,14 @@
+/******************************
+** File:    LoL_tables.sql
+** Name:    Kimberly McLeod, Thomas Luong
+** Class:   Oregon State University, Intro to Databases CS 340
+** Desc:    Table Definitions for League of Legends database of champions, 
+                items, roles, lanes, and homeworlds
+** Date:    05/29/2016
+
+*******************************/
+
+
 DROP TABLE IF EXISTS Homeworld;
 DROP TABLE IF EXISTS Champion;
 DROP TABLE IF EXISTS Lane;
@@ -27,11 +38,6 @@ CREATE TABLE Homeworld (
 
 
 
-
-
-
-
-
 -- 
 --  Table structure for table `champion
 -- 
@@ -42,14 +48,13 @@ CREATE TABLE Champion (
   homeworld_id TINYINT UNSIGNED NOT NULL,
   damage_type VARCHAR(45) NOT NULL,   -- AP, AD, MIXED
 
-CONSTRAINT FK_homeworld_id FOREIGN KEY (homeworld_id)   
+  CONSTRAINT FK_homeworld_id FOREIGN KEY (homeworld_id)   
     REFERENCES Homeworld (homeworld_id) ON DELETE RESTRICT ON UPDATE CASCADE,
 
   PRIMARY KEY  (champion_id),
   KEY idx_champion_name (name)
+
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 
 
 
@@ -66,7 +71,9 @@ CREATE TABLE Lane (
 
 
 
-
+-- 
+-- Table structure for table `Lanes`
+-- 
 
 CREATE TABLE Lanes (
   lane_id TINYINT UNSIGNED NOT NULL,
@@ -81,6 +88,8 @@ CONSTRAINT FK_Lanes_lane_id FOREIGN KEY (lane_id)
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
 -- 
 -- Table structure for table `Role`
 -- 
@@ -90,6 +99,9 @@ CREATE TABLE Role (
   role_name VARCHAR(25) NOT NULL,
   PRIMARY KEY  (role_id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 
 -- 
 -- Table structure for table `Roles`
@@ -101,12 +113,10 @@ CREATE TABLE Roles (
   PRIMARY KEY  (role_id, champion_id),
 
   CONSTRAINT FK_Roles_champion_id FOREIGN KEY (champion_id)   
-    REFERENCES Champion (champion_id)
-    ON DELETE RESTRICT ON UPDATE CASCADE,
+    REFERENCES Champion (champion_id) ON DELETE RESTRICT ON UPDATE CASCADE,
 
   CONSTRAINT FK_Roles_role_id FOREIGN KEY (role_id) 
-    REFERENCES Role (role_id) 
-    ON DELETE RESTRICT ON UPDATE CASCADE
+    REFERENCES Role (role_id) ON DELETE RESTRICT ON UPDATE CASCADE
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -134,8 +144,6 @@ CREATE TABLE Item (
 
 
 
-
-
 --
 -- Table structure for table `Items`
 --
@@ -145,11 +153,11 @@ CREATE TABLE Items (
   champion_id INT(11) UNSIGNED NOT NULL,
   PRIMARY KEY  (item_id, champion_id),
 
-  CONSTRAINT FK_Items_item_id FOREIGN KEY (item_id) REFERENCES Item (item_id) 
-    ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT FK_Items_item_id FOREIGN KEY (item_id) 
+    REFERENCES Item (item_id) ON DELETE RESTRICT ON UPDATE CASCADE,
 
-  CONSTRAINT FK_Items_champion_id FOREIGN KEY (champion_id) REFERENCES Champion (champion_id) 
-    ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT FK_Items_champion_id FOREIGN KEY (champion_id) 
+    REFERENCES Champion (champion_id) ON DELETE RESTRICT ON UPDATE CASCADE
 
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

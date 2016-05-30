@@ -2,12 +2,17 @@
 ** File:    LoL_entries.sql
 ** Name:    Kimberly McLeod, Thomas Luong
 ** Class:   Oregon State University, Intro to Databases CS 340
-** Desc:    Entitie Insertions for League of Legends database of champions, 
+** Desc:    Entity Insertions for League of Legends database of champions, 
                 items, roles, lanes, and homeworlds
 ** Date:    05/29/2016
 
 *******************************/
 
+-- Add this before inserting entries to bypass foreign key checks
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
 
 
@@ -344,7 +349,7 @@ VALUES
 
 -- http://leagueoflegends.wikia.com/wiki/Champion/Champion_Attributes
 
-INSERT INTO Role (role_id, lane_name) 
+INSERT INTO Role (role_id, role_name) 
 VALUES
 (1, 'Bruiser/Tank'),
 (2, 'AP Carry'),
@@ -357,7 +362,7 @@ VALUES
 
 -- The most common role the champion is in
 -- http://leagueoflegends.wikia.com/wiki/List_of_champions
-INSERT INTO Roles (role_id, champion_id)
+INSERT INTO Roles (champion_id, role_id)
 VALUES
 
 (1, 1),
@@ -685,7 +690,7 @@ VALUES
 -- The 6 completed items of the highest win rate % for that champion
 -- http://www.lolking.net/champions
 
-INSERT INTO Items (item_id, champion_id)
+INSERT INTO Items (champion_id, item_id)
 VALUES
 (1, 18),
 (1, 32),
@@ -1059,6 +1064,7 @@ VALUES
 (54, 23),
 (54, 28),
 
+
 (55, 36),
 (55, 1),
 (55, 42),
@@ -1222,7 +1228,7 @@ VALUES
 (78, 22),
 (78, 57),
 (78, 53),
-(78, 8,
+(78, 8),
 (78, 34),
 (78, 56),
 
@@ -1377,6 +1383,7 @@ VALUES
 (100, 30),
 (100, 52),
 (100, 64),
+
 
 (101, 67),
 (101, 10),
