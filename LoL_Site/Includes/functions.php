@@ -1,10 +1,7 @@
 <?php 
 
-	// function redirect_to($new_location) {
-	// 	header("Location: " . $new_location);
-	// 	exit;		
-	// }
 
+	// Outputs a boxed message, used to show if a query was successful
 	function message($message) {
 		$output  = "<div class=\"message\">";
         $output .= "{$message}";
@@ -13,16 +10,17 @@
         return $output;
 	}
 
-
+	// Used to prevent SQL Injection
 	function mysql_prep($string) {
 		global $connection;
 		$escaped_string = mysqli_real_escape_string($connection, $string);
 		return $escaped_string;
 	}
 
+	// Test if there was a query error
 	function confirm_query($result_set) {
 		if(!$result_set) {
-			// Test if there was a query error
+	
 			die("Database query failed.");
 		}
 	}
@@ -30,7 +28,7 @@
 	
 
 
-
+	// Takes in a table name and outputs all entries from the table
 	function find_all_from($tablename){
 		global $connection;
 
@@ -43,7 +41,7 @@
 	}
 
 
-
+	// Given table name, it prints out all the entries from the set
 	function print_all_from($tablename){
 		$output = "<ul class=\"{$tablename}\">";
 		$query_set = find_all_from($tablename); 			
@@ -52,7 +50,7 @@
 
 			// Since champion's names only have "name"
 			if($tablename == "Champion") {
-				$output .= $query["name"];
+				$output .= "{$query["champion_id"]}. {$query["name"]}";
 			}	else {
 
 				$tablename_lower = strtolower($tablename);
