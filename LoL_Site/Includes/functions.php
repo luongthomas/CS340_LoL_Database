@@ -46,15 +46,24 @@
 
 	function print_all_from($tablename){
 		$output = "<ul class=\"{$tablename}\">";
-		$champion_set = find_all_from($tablename); 			
-		while($champion = mysqli_fetch_assoc($champion_set)) {
+		$query_set = find_all_from($tablename); 			
+		while($query = mysqli_fetch_assoc($query_set)) {
 			$output .= "<li>";
 
-			$output .= $champion["name"];
-			
+			// Since champion's names only have "name"
+			if($tablename == "Champion") {
+				$output .= $query["name"];
+			}	else {
+
+				$tablename_lower = strtolower($tablename);
+				$output .= $query["{$tablename_lower}_name"];
+			}
+
+
+
 			$output .= "</li>";
 		}
-		mysqli_free_result($champion_set);
+		mysqli_free_result($query_set);
 		$output .= "</ul>";
 		
 		return $output;

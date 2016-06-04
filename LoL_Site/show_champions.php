@@ -1,8 +1,7 @@
-<?php // require_once("./Includes/session.php"); ?>
 <?php require_once("./Includes/db_connection.php"); ?>
 <?php require_once("./Includes/functions.php"); ?>
 <?php include("./Includes/layouts/header.php"); ?>
-<?php //include("./Includes/layouts/body.php"); ?>
+
 
 
 

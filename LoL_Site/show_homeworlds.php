@@ -7,7 +7,7 @@
 
 
 
-<?php echo print_champions() ?>
+<?php echo print_all_from("Homeworld"); ?>
 
 
 
