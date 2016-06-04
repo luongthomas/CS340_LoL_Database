@@ -27,7 +27,7 @@ a:hover { color: #1A446C; }
 #header h1 {padding: 1em; margin: 0; }
 #header a {text-decoration:none; color: #D4E6F4;}
 #main {
-	height: 400px; width: 100%;
+	height: 600px; width: 100%;
 	margin: 0; padding: 0;
 }
 #footer {
