@@ -15,40 +15,40 @@
     </form>
 
     <p>Add Role to Existing Champion</p>	
-    <form  name="addRole" method="post" action="index.php?go">
+    <form  name="addRole" method="post" action="index2.php?go">
       <input  type="text" name="champion" placeholder="Champion's Name">
       <input  type="text" name="role" placeholder="Role">
       <input  type="submit" name="addChampRole-submit" value="Add">
     </form>
 
     <p>Add Item to Existing Champion</p>	
-    <form  name="addRole" method="post" action="index.php?go">
+    <form  name="addRole" method="post" action="index2.php?go">
       <input  type="text" name="champion" placeholder="Champion's Name">
       <input  type="text" name="item" placeholder="Item">
       <input  type="submit" name="addChampItem-submit" value="Add">
     </form>
 
     <p>Add Lane to Existing Champion</p>	
-    <form  name="addRole" method="post" action="index.php?go">
+    <form  name="addRole" method="post" action="index2.php?go">
       <input  type="text" name="champion" placeholder="Champion's Name">
       <input  type="text" name="lane" placeholder="Lane">
       <input  type="submit" name="addChampLane-submit" value="Add">
     </form>
 
     <p>Add New Role</p>	
-    <form  name="addRole" method="post" action="index.php?go">
+    <form  name="addRole" method="post" action="index2.php?go">
       <input  type="text" name="role" placeholder="Role">
       <input  type="submit" name="addRole-submit" value="Add">
     </form>
 
     <p>Add New Item</p>	
-    <form  name="addItem" method="post" action="index.php?go">
+    <form  name="addItem" method="post" action="index2.php?go">
       <input  type="text" name="name" placeholder="Item Name">
       <input  type="submit" name="addItem-submit" value="Add">
     </form>
 
     <p>Add New Lane</p>	
-    <form  name="addLane" method="post" action="index.php?go">
+    <form  name="addLane" method="post" action="index2.php?go">
       <input  type="text" name="name" placeholder="Lane Name">
       <input  type="submit" name="addLane-submit" value="Add">
     </form>
@@ -61,13 +61,13 @@
     </form>
 
     <p>Delete Champion</p>	
-    <form  name="deleteChamp" method="post" action="index.php?go">
+    <form  name="deleteChamp" method="post" action="index2.php?go">
       <input  type="text" name="name" placeholder="Name">
       <input  type="submit" name="deleteChamp-submit" value="Delete">
     </form>
 	
     <p>Search for Champion</p>	
-    <form  name="searchDB" method="post" action="index.php?go">
+    <form  name="searchDB" method="post" action="index2.php?go">
       <input  type="text" name="name" placeholder="Name">
       <input  type="submit" name="searchDB-submit" value="Search">
     </form>
@@ -82,9 +82,11 @@
 		if(isset($_POST['addChamp-submit'])){
 		if(isset($_GET['go'])){
 		$name=$_POST['name'];
+		//$name=mysqli_real_escape_string($name);
 		$damage_type=$_POST['damage_type'];
-		$homeworld=$POST['homeworld'];
-		$homeworld=mysqli_real_escape_string($homeworld);
+		//$damage_type=mysqli_real_escape_string($damage_type);
+		$homeworld=$_POST['homeworld'];
+		//$homeworld=mysqli_real_escape_string($homeworld);
 		//connect  to the database
 		$conn=mysqli_connect  (DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 		if ($conn->connect_errno){
@@ -97,14 +99,9 @@
 
 		$query=("INSERT INTO Champion (homeworld_id, name, damage_type) VALUES ((SELECT homeworld_id FROM Homeworld WHERE Homeworld.homeworld_name LIKE '$homeworld'), '$name', '$damage_type')");
 		//$retval = mysqli_fetch_object($query)->$homeworld;
+		var_dump($query);
+		var_dump($homeworld);
 		echo "Query Done";
-/*
-		$query="BEGIN TRANSACTION
-			SET @homeworld_id = (SELECT h.homeworld_id FROM Homeworld h WHERE h.homeworld_id = '$homeworld';
-			INSERT INTO Champion (homeworld_id, name, damage_type) VALUES (@homeworld_id, '$name', '$damage_type');
-		COMMIT";
-*/
-
 		$result=mysqli_query($conn, $query);
 		echo  "Champion Added";
 
@@ -118,6 +115,7 @@
 	if (!empty($_POST['addChampRole-submit'])){
 		if(isset($_POST['addChampRole-submit'])){
 		if(isset($_GET['go'])){
+		$champion=$_POST['champion'];
 		$role=$_POST['role'];
 		//connect  to the database
 		$conn=mysqli_connect  (DB_SERVER, DB_USER, DB_PASS, DB_NAME);
@@ -128,10 +126,11 @@
 		//-select  the database to use
 		//$mydb=mysqli_select_db(DB_SERVER);
 		//-query  the database table
-		$query="INSERT INTO Role (role_name) VALUES ('$role')";
+		$query="INSERT INTO Roles (champion_id, role_id) VALUES ((SELECT champion_id FROM Champion WHERE name LIKE '$champion'), (SELECT role_id FROM Role WHERE role_name LIKE '$role'))";
 		$result=mysqli_query($conn, $query);
 		echo  "Role Added";
-
+		var_dump($champion);
+		var_dump($role);
 		if(isset($conn)) {
 			mysqli_close($conn);
 		}
@@ -143,7 +142,8 @@
 	if (!empty($_POST['addChampItem-submit'])){
 		if(isset($_POST['addChampItem-submit'])){
 		if(isset($_GET['go'])){
-		$role=$_POST['role'];
+		$champion=$_POST['champion'];
+		$item=$_POST['item'];
 		//connect  to the database
 		$conn=mysqli_connect  (DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 		if ($conn->connect_errno){
@@ -153,10 +153,11 @@
 		//-select  the database to use
 		//$mydb=mysqli_select_db(DB_SERVER);
 		//-query  the database table
-		$query="INSERT INTO Role (role_name) VALUES ('$role')";
+		$query="INSERT INTO Items (item_id, champion_id) VALUES ((SELECT item_id FROM Item WHERE item_name LIKE '$item'), (SELECT champion_id FROM Champion WHERE name LIKE '$champion'))";
 		$result=mysqli_query($conn, $query);
-		echo  "Role Added";
-
+		echo  "Item Added";
+		var_dump($champion);
+		var_dump($item);
 		if(isset($conn)) {
 			mysqli_close($conn);
 		}
@@ -168,7 +169,8 @@
 	if (!empty($_POST['addChampLane-submit'])){
 		if(isset($_POST['addChampLane-submit'])){
 		if(isset($_GET['go'])){
-		$role=$_POST['role'];
+		$champion=$_POST['champion'];
+		$lane=$_POST['lane'];
 		//connect  to the database
 		$conn=mysqli_connect  (DB_SERVER, DB_USER, DB_PASS, DB_NAME);
 		if ($conn->connect_errno){
@@ -178,10 +180,11 @@
 		//-select  the database to use
 		//$mydb=mysqli_select_db(DB_SERVER);
 		//-query  the database table
-		$query="INSERT INTO Role (role_name) VALUES ('$role')";
+		$query="INSERT INTO Lanes (lane_id, champion_id) VALUES ((SELECT lane_id FROM Lane WHERE lane_name LIKE '$lane'), (SELECT champion_id FROM Champion WHERE name LIKE '$champion'))";
 		$result=mysqli_query($conn, $query);
 		echo  "Role Added";
-
+		var_dump($champion);
+		var_dump($lane);
 		if(isset($conn)) {
 			mysqli_close($conn);
 		}
