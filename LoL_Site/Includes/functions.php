@@ -51,6 +51,10 @@
 			// Since champion's names only have "name"
 			if($tablename == "Champion") {
 				$output .= "{$query["champion_id"]}. {$query["name"]}";
+				$output .= " <img src='http://ddragon.leagueoflegends.com/cdn/6.11.1/img/champion/";
+				
+				$output .= "{$query['name']}";
+				$output .= ".png' class='icon'>";
 			}	else {
 
 				$tablename_lower = strtolower($tablename);
