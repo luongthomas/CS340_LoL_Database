@@ -1,5 +1,18 @@
 <?php 
 
+	// function redirect_to($new_location) {
+	// 	header("Location: " . $new_location);
+	// 	exit;		
+	// }
+
+	function message($message) {
+		$output  = "<div class=\"message\">";
+        $output .= "{$message}";
+        $output .= "</div>";
+
+        return $output;
+	}
+
 
 	function mysql_prep($string) {
 		global $connection;
@@ -14,13 +27,15 @@
 		}
 	}
 
+	
 
 
-	function find_all_champions(){
+
+	function find_all_from($tablename){
 		global $connection;
 
 		$query = "SELECT * ";
-		$query .= "FROM Champion ";
+		$query .= "FROM {$tablename} ";
 
 		$champion_set = mysqli_query($connection, $query);
 		confirm_query($champion_set);		
@@ -29,9 +44,9 @@
 
 
 
-	function print_champions(){
-		$output = "<ul class=\"champions\">";
-		$champion_set = find_all_champions(); 			
+	function print_all_from($tablename){
+		$output = "<ul class=\"{$tablename}\">";
+		$champion_set = find_all_from($tablename); 			
 		while($champion = mysqli_fetch_assoc($champion_set)) {
 			$output .= "<li>";
 

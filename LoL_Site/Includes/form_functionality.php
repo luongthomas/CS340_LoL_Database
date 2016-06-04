@@ -1,72 +1,12 @@
-<?php chdir(dirname(__FILE__)) ?>
-<?php require_once("./Includes/session.php"); ?>
-<?php require_once("./Includes/db_connection.php"); ?>
-<?php require_once("./Includes/functions.php"); ?>
-<?php include("./Includes/layouts/header.php"); ?>
-
-
-
-<div id="main">
-
-<p><body>
-  <h3>Add/Delete/Search Database</h3>
-  <p>Add Champion</p>
-  <form  name="addChamp" method="post" action="index.php?go">
-    <input  type="text" name="name" placeholder="Name">
-    <input  type="text" name="homeworld" placeholder="Homeworld">
-    <input  type="text" name="damage_type" placeholder="Damage Type">
-    <input  type="text" name="role" placeholder="Role">
-    <input  type="text" name="item" placeholder="Item">
-    <input  type="text" name="lane" placeholder="Lane">
-    <input  type="submit" name="addChamp-submit" value="Add">
-  </form>
-
-
-<!-- important that the input field name is correct, for php to select it's value -->
-
-  <p>Add Role</p>	
-  <form  name="addRole" method="post" action="">
-    <input  type="text" name="role_name" placeholder="Role">
-    <input  type="submit" name="addRole-submit" value="Add">
-  </form>
-
-  <p>Add Item</p>	
-  <form  name="addItem" method="post" action="">
-    <input  type="text" name="item_name" placeholder="Item Name">
-    <input  type="submit" name="addItem-submit" value="Add">
-  </form>
-
-  <p>Add Lane</p>	
-  <form  name="addLane" method="post" action="">
-    <input  type="text" name="lane_name" placeholder="Lane Name">
-    <input  type="submit" name="addLane-submit" value="Add">
-  </form>
-
-  <p>Add Homeworld</p>	
-  <form  name="addHomeworld" method="post" action="">
-    <input  type="text" name="homeworld_name" placeholder="Homeworld">
-    <input  type="text" name="homeworld_desc" placeholder="Description">
-    <input  type="submit" name="addHomeworld-submit" value="Add">
-  </form>
-
-
-  <p>Search for Champion</p>	
-  <form  name="searchDB" method="post" action="">
-    <input  type="text" name="champion_name" placeholder="Name">
-    <input  type="submit" name="searchDB-submit" value="Search">
-  </form>
-
-</div>
-
-<p><a href="index.php">Back to the main page</a></p>
-
-
-
 <?php
 
+function form_submit()
+{
+    global $connection;
     
     if (!empty($_POST['addChamp-submit'])) {
         if (isset($_POST['addChamp-submit'])) {
+            if (isset($_GET['go'])) {
                 $homeworld   = $_POST['homeworld'];
                 $name        = $_POST['name'];
                 $damage_type = $_POST['damage_type'];
@@ -94,86 +34,108 @@
                     COMMIT";
                 $result = mysqli_query($connection, $query);
                 echo "Champion Added";
-              
-            
+                
+            }
         }
     }
     
-
-    // Taken from Skoland example
-    if (isset($_POST['addRole-submit'])) {
-      // Process the form
-
-      $role = mysql_prep($_POST["role_name"]);
-
-      $query  = "INSERT INTO Role (";
-      $query .= " role_name";
-      $query .= ") VALUES (";
-      $query .= " '{$role}'";
-      $query .= ")";
-      $result = mysqli_query($connection, $query);
-
-      echo message("Role added");
+    if (!empty($_POST['addRole-submit'])) {
+        if (isset($_POST['addRole-submit'])) {
+            if (isset($_GET['go'])) {
+                $role = $_POST['role'];
+                
+                
+                //-select  the database to use
+                //$mydb=mysqli_select_db(DB_SERVER);
+                //-query  the database table
+                $query  = "INSERT INTO Role (role_name) VALUES ('$role')";
+                $result = mysqli_query($connection, $query);
+                echo "Role Added";
+                
+                
+            }
+        }
     }
-
-
-
-    if (isset($_POST['addItem-submit'])) {
-      // Process the form
-
-      $item_name = mysql_prep($_POST["item_name"]);
-
-      $query  = "INSERT INTO Item (";
-      $query .= " item_name";
-      $query .= ") VALUES (";
-      $query .= " '{$item_name}'";
-      $query .= ")";
-      $result = mysqli_query($connection, $query);
-
-      echo message("Item added");
-    }
-
-
-
-    if (isset($_POST['addLane-submit'])) {
-      // Process the form
-
-      $lane_name = mysql_prep($_POST["lane_name"]);
-
-      $query  = "INSERT INTO Lane (";
-      $query .= " lane_name";
-      $query .= ") VALUES (";
-      $query .= " '{$lane_name}'";
-      $query .= ")";
-      $result = mysqli_query($connection, $query);
-
-      echo message("Lane added");
-    }
-
     
-    if (isset($_POST['addHomeworld-submit'])) {
-      // Process the form
-
-      $homeworld_name = mysql_prep($_POST["homeworld_name"]);
-      $homeworld_desc = mysql_prep($_POST["homeworld_desc"]);
-
-      $query  = "INSERT INTO Homeworld (";
-      $query .= " homeworld_name, homeworld_desc";
-      $query .= ") VALUES (";
-      $query .= " '{$homeworld_name}', '{$homeworld_desc}'";
-      $query .= ")";
-      $result = mysqli_query($connection, $query);
-
-      echo message("Homeworld added");
+    if (!empty($_POST['addItem-submit'])) {
+        if (isset($_POST['addItem-submit'])) {
+            if (isset($_GET['go'])) {
+                $name        = $_POST['name'];
+                $description = $_POST['description'];
+                
+                //-query  the database table
+                $query  = "INSERT INTO Item (item_name) VALUES ('$name', '$description')";
+                $result = mysqli_query($connection, $query);
+                echo "Item Added";
+                
+                
+            }
+        }
     }
-
-
-
-
-
+    
+    if (!empty($_POST['addLane-submit'])) {
+        if (isset($_POST['addLane-submit'])) {
+            if (isset($_GET['go'])) {
+                $name = $_POST['name'];
+                
+                //-query  the database table
+                $query  = "INSERT INTO Lane (lane_name) VALUES ('$name')";
+                $result = mysqli_query($connection, $query);
+                echo "Lane Added";
+                
+                
+            }
+        }
+        
+    }
+    
+    if (!empty($_POST['addHomeworld-submit'])) {
+        echo "Adding homeworld";
+        if (isset($_POST['addHomeworld-submit'])) {
+            if (isset($_GET['go'])) {
+                echo "1";
+                $name        = $_POST['name'];
+                $description = $_POST['description'];
+                echo "2";
+                
+                
+                
+                //-select  the database to use
+                //$mydb=mysqli_select_db(DB_SERVER);
+                //-query  the database table
+                //$query="INSERT INTO Homeworld" . "(homeworld_name, homeworld_desc)" . "VALUES ('$name', '$description')";
+                echo "4";
+                $query  = "INSERT INTO Homeworld (homeworld_name, homeworld_desc) VALUES ('$name', '$description')";
+                $result = mysqli_query($connection, $query);
+                echo $result;
+                echo "Homeworld Added";
+                
+            }
+        }
+        
+    }
+    
+    if (!empty($_POST['deleteChamp-submit'])) {
+        if (isset($_POST['deleteChamp-submit'])) {
+            if (isset($_GET['go'])) {
+                $name = $_POST['name'];
+                
+                
+                //-select  the database to use
+                //$mydb=mysqli_select_db(DB_SERVER);
+                //-query  the database table
+                $query  = "DELETE champion WHERE name = '$name'";
+                $result = mysqli_query($connection, $query);
+                echo "Champion Deleted";
+                
+                
+            }
+        }
+    }
     
     if (!empty($_POST['searchDB-submit'])) {
         if (isset($_POST['searchDB-submit'])) {
+            if (isset($_GET['go'])) {
                 if (preg_match("/^[  a-zA-Z]+/", $_POST['name'])) {
                     $name = $_POST['name'];
                     
@@ -245,21 +207,9 @@
                 //else{
                 //echo  "Please enter a search query";
                 //}
-            
+            }
         }
     }
-
+}
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-<?php include("./Includes/layouts/footer.php") ?>

@@ -1,4 +1,4 @@
-<div id="footer">CS 340</div>
+<div id="footer"><a href="index.php">Main Page</a></div>
 
 
 

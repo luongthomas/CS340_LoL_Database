@@ -7,7 +7,7 @@
 
 
 
-<?php echo print_all_from("Champion"); ?>
+<?php echo print_champions() ?>
 
 
 
