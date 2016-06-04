@@ -13,7 +13,7 @@
   
   <h3>Add/Update/Search Database</h3>
   <p>Add Champion</p>
-  <form  name="addChamp" method="post" action="index2.php?go">
+  <form  name="addChamp" method="post" action="add_delete.php?go">
       <input  type="text" name="name" placeholder="Name">
       <input  type="text" name="homeworld" placeholder="Homeworld">
       <input  type="text" name="damage_type" placeholder="Damage Type">
@@ -21,46 +21,46 @@
     </form>
 
     <p>Add Role to Existing Champion</p>	
-    <form  name="addRole" method="post" action="index2.php?go">
+    <form  name="addRole" method="post" action="add_delete.php?go">
       <input  type="text" name="champion" placeholder="Champion's Name">
       <input  type="text" name="role" placeholder="Role">
       <input  type="submit" name="addChampRole-submit" value="Add">
     </form>
 
     <p>Add Item to Existing Champion</p>	
-    <form  name="addRole" method="post" action="index2.php?go">
+    <form  name="addRole" method="post" action="add_delete.php?go">
       <input  type="text" name="champion" placeholder="Champion's Name">
       <input  type="text" name="item" placeholder="Item">
       <input  type="submit" name="addChampItem-submit" value="Add">
     </form>
 
     <p>Add Lane to Existing Champion</p>	
-    <form  name="addRole" method="post" action="index2.php?go">
+    <form  name="addRole" method="post" action="add_delete.php?go">
       <input  type="text" name="champion" placeholder="Champion's Name">
       <input  type="text" name="lane" placeholder="Lane">
       <input  type="submit" name="addChampLane-submit" value="Add">
     </form>
 
     <p>Add New Role</p>	
-    <form  name="addRole" method="post" action="index2.php?go">
+    <form  name="addRole" method="post" action="add_delete.php?go">
       <input  type="text" name="role" placeholder="Role">
       <input  type="submit" name="addRole-submit" value="Add">
     </form>
 
     <p>Add New Item</p>	
-    <form  name="addItem" method="post" action="index2.php?go">
+    <form  name="addItem" method="post" action="add_delete.php?go">
       <input  type="text" name="name" placeholder="Item Name">
       <input  type="submit" name="addItem-submit" value="Add">
     </form>
 
     <p>Add New Lane</p>	
-    <form  name="addLane" method="post" action="index2.php?go">
+    <form  name="addLane" method="post" action="add_delete.php?go">
       <input  type="text" name="name" placeholder="Lane Name">
       <input  type="submit" name="addLane-submit" value="Add">
     </form>
 
     <p>Add New Homeworld</p>	
-    <form  name="addHomeworld" method="post" action="index.php?go">
+    <form  name="addHomeworld" method="post" action="add_delete.php?go">
       <input  type="text" name="name" placeholder="Homeworld">
       <input  type="text" name="description" placeholder="Description">
       <input  type="submit" name="addHomeworld-submit" value="Add">
@@ -68,7 +68,7 @@
 
 	
     <p>Search for Champion</p>	
-    <form  name="searchDB" method="post" action="index2.php?go">
+    <form  name="searchDB" method="post" action="add_delete.php?go">
       <input  type="text" name="name" placeholder="Name">
       <input  type="submit" name="searchDB-submit" value="Search">
     </form>
