@@ -64,6 +64,13 @@
 
 				$tablename_lower = strtolower($tablename);
 				$output .= $query["{$tablename_lower}_name"];
+
+				if($tablename == "Homeworld") {
+					$output .= "<ul class='homeworld_desc'><li>";
+					$output .= "{$query['homeworld_desc']}";
+					$output .= "</li></ul><br>";
+
+				}
 			}
 
 
