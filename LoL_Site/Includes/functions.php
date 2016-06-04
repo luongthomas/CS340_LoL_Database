@@ -49,11 +49,16 @@
 			$output .= "<li>";
 
 			// Since champion's names only have "name"
+			// Adds images next to their names
 			if($tablename == "Champion") {
 				$output .= "{$query["champion_id"]}. {$query["name"]}";
 				$output .= " <img src='http://ddragon.leagueoflegends.com/cdn/6.11.1/img/champion/";
 				
-				$output .= "{$query['name']}";
+				// Removes spaces from the name, fixes Xin Zhao
+				$str = str_replace(' ', '', $query['name']);
+				$str = mysql_prep($str);
+				$output .= "{$str}";
+				// $output .= "{$query['name']}";
 				$output .= ".png' class='icon'>";
 			}	else {
 
